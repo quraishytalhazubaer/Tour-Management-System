@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Tourism System Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Sand and Ocean Blue -->
+    <!-- Application Structure Plan: A single-page application with a fixed sidebar for primary navigation, allowing users to switch between key documentation sections (Overview, Roles, Features, Technology, Security, Roadmap). This structure was chosen to break down the dense document into manageable, thematic chunks, promoting exploration over linear reading. The content of each section is presented using interactive cards, diagrams, and mock charts to make the information engaging and easy to digest. This non-linear, dashboard-like approach is better for usability than a long scrolling document, as it allows stakeholders to quickly jump to the information most relevant to them. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: User Roles -> Goal: Organize/Compare -> Viz: Interactive HTML grid. Interaction: Hover to highlight a role and its description. Justification: More engaging and clearer than a static table.
+        - Report Info: Frontend/Backend Features -> Goal: Inform/Organize -> Viz: Tabbed content with animated cards. Interaction: Clicking tabs filters features. Clicking cards could expand for more detail (future). Justification: Organizes a large number of features cleanly.
+        - Report Info: Analytics Dashboard -> Goal: Demonstrate -> Viz: Mock charts using Chart.js. Interaction: Tooltips on hover. Justification: Visually represents the *type* of data analytics the system will provide, making an abstract concept concrete.
+        - Report Info: Technology Stack -> Goal: Organize/Inform -> Viz: Layered diagram using HTML/Tailwind. Interaction: N/A. Justification: Clearly shows the architectural layers and their relationships.
+        - Report Info: Security & Deployment -> Goal: Inform -> Viz: Icon-based feature lists. Interaction: N/A. Justification: Quickly communicates key technical strengths.
+        - Report Info: Future Enhancements -> Goal: Change/Plan -> Viz: Horizontal timeline diagram using HTML/Tailwind. Interaction: N/A. Justification: Clearly visualizes the project's future direction.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FDFBF8; }
+        .nav-link { transition: all 0.3s ease; }
+        .nav-link.active, .nav-link:hover { background-color: #EAE3D9; color: #1E3A8A; }
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-button.active { border-color: #1E3A8A; background-color: #DBEAFE; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar Navigation -->
+        <aside class="w-1/5 bg-[#F4EFE9] text-stone-700 p-6 sticky top-0 h-screen hidden md:block">
+            <h1 class="text-2xl font-bold text-blue-900 mb-8">Tourism Platform</h1>
+            <nav class="space-y-2">
+                <a href="#overview" class="nav-link active flex items-center p-3 rounded-lg font-medium">
+                    <span class="mr-3">📘</span> Overview
+                </a>
+                <a href="#roles" class="nav-link flex items-center p-3 rounded-lg font-medium">
+                    <span class="mr-3">👥</span> User Roles
+                </a>
+                <a href="#features" class="nav-link flex items-center p-3 rounded-lg font-medium">
+                    <span class="mr-3">⚙️</span> System Features
+                </a>
+                 <a href="#analytics" class="nav-link flex items-center p-3 rounded-lg font-medium">
+                    <span class="mr-3">📊</span> Analytics Mockup
+                </a>
+                <a href="#tech" class="nav-link flex items-center p-3 rounded-lg font-medium">
+                    <span class="mr-3">🏗️</span> Tech & Deployment
+                </a>
+                <a href="#security" class="nav-link flex items-center p-3 rounded-lg font-medium">
+                    <span class="mr-3">🛡️</span> Security
+                </a>
+                <a href="#roadmap" class="nav-link flex items-center p-3 rounded-lg font-medium">
+                    <span class="mr-3">🗺️</span> Future Roadmap
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Mobile Navigation (Dropdown) -->
+        <div class="md:hidden w-full p-4 bg-[#F4EFE9] sticky top-0 z-10">
+            <select id="mobile-nav" class="w-full p-2 rounded-lg border bg-white">
+                <option value="overview">Overview</option>
+                <option value="roles">User Roles</option>
+                <option value="features">System Features</option>
+                <option value="analytics">Analytics Mockup</option>
+                <option value="tech">Tech & Deployment</option>
+                <option value="security">Security</option>
+                <option value="roadmap">Future Roadmap</option>
+            </select>
+        </div>
+
+        <!-- Main Content -->
+        <main class="w-full md:w-4/5 p-6 sm:p-10">
+            
+            <!-- Overview Section -->
+            <section id="overview" class="content-section active">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">Project Overview</h2>
+                <p class="text-lg text-stone-600 mb-8">This document outlines a comprehensive tourism management platform designed to provide a seamless, transparent experience for tourists and a powerful, collaborative environment for internal staff. Explore the different sections to understand the system's architecture, features, and vision.</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2">Engaging Tourist Portal</h3>
+                        <p class="text-stone-600">To create an intuitive public-facing portal for tourists to discover, book, and personalize travel packages with ease and confidence.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2">Streamlined Internal Operations</h3>
+                        <p class="text-stone-600">To centralize and automate tour planning, booking management, financial tracking, and staff collaboration for maximum efficiency.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2">Data-Driven Insights</h3>
+                        <p class="text-stone-600">To provide robust reporting and analytics, empowering management with actionable insights for strategic business growth.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2">Scalable & Secure Foundation</h3>
+                        <p class="text-stone-600">To build a secure, compliant, and maintainable system on a modern technology stack, ready for future expansion and new features.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Roles Section -->
+            <section id="roles" class="content-section">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">User Roles & Permissions</h2>
+                <p class="text-lg text-stone-600 mb-8">The system is built on a robust Role-Based Access Control (RBAC) model. Each role has specific permissions tailored to their responsibilities. Hover over a role to see its key responsibilities.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="roles-grid">
+                    <!-- Roles will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features" class="content-section">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">System Features</h2>
+                 <p class="text-lg text-stone-600 mb-6">The platform is divided into two main areas: the public-facing Frontend for tourists and the internal Backend for staff. Use the tabs below to explore the features of each area.</p>
+                <div class="mb-6 border-b border-stone-200">
+                    <nav class="flex space-x-4" aria-label="Tabs">
+                        <button class="tab-button active font-medium text-lg px-4 py-2 border-b-2" data-tab="frontend">Frontend (Public)</button>
+                        <button class="tab-button font-medium text-lg px-4 py-2 border-b-2" data-tab="backend">Backend (Internal)</button>
+                    </nav>
+                </div>
+                <div id="frontend-features" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Frontend feature cards -->
+                </div>
+                 <div id="backend-features" class="hidden grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Backend feature cards -->
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="content-section">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">Analytics Dashboard Mockup</h2>
+                <p class="text-lg text-stone-600 mb-8">The Admin and Accountant roles have access to a powerful analytics dashboard to monitor business performance. This mockup demonstrates the types of visualizations available, providing at-a-glance insights into booking trends, revenue, and popular destinations.</p>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-semibold text-center mb-4">Monthly Booking Trends</h3>
+                        <div class="chart-container h-[300px] md:h-[350px]">
+                            <canvas id="bookingTrendsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-semibold text-center mb-4">Popular Destinations by Bookings</h3>
+                        <div class="chart-container h-[300px] md:h-[350px]">
+                            <canvas id="popularDestinationsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 lg:col-span-2">
+                        <h3 class="font-semibold text-center mb-4">Revenue vs. Expenses (Last 6 Months)</h3>
+                        <div class="chart-container h-[300px] md:h-[350px]">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technology Stack Section -->
+            <section id="tech" class="content-section">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">Technology & Deployment</h2>
+                <p class="text-lg text-stone-600 mb-8">The platform is built on a modern, scalable, and robust technology stack, designed for high performance and maintainability. Below is a breakdown of the key technologies and our deployment strategy.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-bold text-xl text-blue-800 mb-4">Technology Stack</h3>
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <div class="font-bold text-blue-900">Frontend</div>
+                                <p class="text-blue-800">React.js, Tailwind CSS, shadcn/ui</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <div class="font-bold text-green-900">Backend</div>
+                                <p class="text-green-800">Django REST Framework (Python)</p>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <div class="font-bold text-purple-900">Database</div>
+                                <p class="text-purple-800">PostgreSQL</p>
+                            </div>
+                            <div class="bg-yellow-50 p-4 rounded-lg">
+                                <div class="font-bold text-yellow-900">Authentication</div>
+                                <p class="text-yellow-800">JWT & OAuth 2.0</p>
+                            </div>
+                             <div class="bg-sky-50 p-4 rounded-lg">
+                                <div class="font-bold text-sky-900">Background Tasks</div>
+                                <p class="text-sky-800">Celery & Redis</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-xl text-blue-800 mb-4">Deployment Strategy</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-lg border flex items-center">
+                                <span class="text-2xl mr-4">☁️</span>
+                                <div>
+                                    <div class="font-bold">Cloud Platform</div>
+                                    <p>AWS or Google Cloud Platform (GCP)</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border flex items-center">
+                                <span class="text-2xl mr-4">🔄</span>
+                                <div>
+                                    <div class="font-bold">CI/CD Pipeline</div>
+                                    <p>Automated testing & deployment via GitHub Actions</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border flex items-center">
+                                 <span class="text-2xl mr-4">📈</span>
+                                <div>
+                                    <div class="font-bold">Scalability</div>
+                                    <p>Auto-scaling compute instances & CDN for assets</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Security Section -->
+            <section id="security" class="content-section">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">Security & Compliance</h2>
+                <p class="text-lg text-stone-600 mb-8">Security is a top priority. The platform incorporates multiple layers of protection to safeguard user data, ensure system integrity, and comply with data privacy regulations.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2 flex items-center"><span class="text-2xl mr-3">🔑</span> RBAC</h3>
+                        <p class="text-stone-600">Strict Role-Based Access Control ensures users only access data and functions relevant to their role.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2 flex items-center"><span class="text-2xl mr-3">🔒</span> Data Encryption</h3>
+                        <p class="text-stone-600">All sensitive data is encrypted in transit (SSL/TLS) and at rest to protect privacy.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2 flex items-center"><span class="text-2xl mr-3">📱</span> 2FA</h3>
+                        <p class="text-stone-600">Mandatory Two-Factor Authentication for all staff accounts to prevent unauthorized access.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2 flex items-center"><span class="text-2xl mr-3">⚖️</span> GDPR Compliant</h3>
+                        <p class="text-stone-600">Designed to comply with GDPR and local data privacy laws, respecting user data rights.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2 flex items-center"><span class="text-2xl mr-3">📝</span> Audit Trails</h3>
+                        <p class="text-stone-600">Comprehensive logging and audit trails for all critical system actions and data modifications.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2 flex items-center"><span class="text-2xl mr-3">💾</span> Backup & Recovery</h3>
+                        <p class="text-stone-600">Daily automated backups and a defined disaster recovery plan ensure business continuity.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Roadmap Section -->
+            <section id="roadmap" class="content-section">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">Future Roadmap</h2>
+                <p class="text-lg text-stone-600 mb-8">The platform is designed for growth. Here are some of the key enhancements planned for future development to further enrich the user experience and expand business capabilities.</p>
+                <div class="relative wrap overflow-hidden p-2 sm:p-10 h-full">
+                    <div class="border-2-2 absolute border-opacity-20 border-stone-400 h-full border" style="left: 50%"></div>
+                    <!-- Right-side item -->
+                    <div class="mb-8 flex justify-between items-center w-full right-timeline">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-blue-800 shadow-xl w-8 h-8 rounded-full">
+                            <h1 class="mx-auto font-semibold text-lg text-white">1</h1>
+                        </div>
+                        <div class="order-1 bg-blue-100 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                            <h3 class="mb-3 font-bold text-blue-900 text-xl">Multi-vendor Marketplace</h3>
+                            <p class="text-sm leading-snug tracking-wide text-blue-800">Enable third-party tour operators to list and sell packages on the platform.</p>
+                        </div>
+                    </div>
+                    <!-- Left-side item -->
+                    <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-blue-800 shadow-xl w-8 h-8 rounded-full">
+                            <h1 class="mx-auto text-white font-semibold text-lg">2</h1>
+                        </div>
+                        <div class="order-1 bg-stone-100 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                             <h3 class="mb-3 font-bold text-stone-900 text-xl">Native Mobile Apps</h3>
+                            <p class="text-sm leading-snug tracking-wide text-stone-800">Develop dedicated iOS and Android apps for an optimized mobile experience.</p>
+                        </div>
+                    </div>
+                    <!-- Right-side item -->
+                    <div class="mb-8 flex justify-between items-center w-full right-timeline">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-blue-800 shadow-xl w-8 h-8 rounded-full">
+                            <h1 class="mx-auto font-semibold text-lg text-white">3</h1>
+                        </div>
+                        <div class="order-1 bg-blue-100 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                            <h3 class="mb-3 font-bold text-blue-900 text-xl">Deeper AI Integration</h3>
+                            <p class="text-sm leading-snug tracking-wide text-blue-800">Implement AI for dynamic pricing and fully personalized itinerary creation.</p>
+                        </div>
+                    </div>
+                     <!-- Left-side item -->
+                    <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-blue-800 shadow-xl w-8 h-8 rounded-full">
+                            <h1 class="mx-auto text-white font-semibold text-lg">4</h1>
+                        </div>
+                        <div class="order-1 bg-stone-100 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                            <h3 class="mb-3 font-bold text-stone-900 text-xl">VR/AR Tour Previews</h3>
+                            <p class="text-sm leading-snug tracking-wide text-stone-800">Allow users to virtually explore destinations and hotels before booking.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const rolesData = [
+                { name: 'Tourist/User', icon: '🌍', description: 'View packages, book, cancel, rate, download guides, request destinations, and manage their profile.' },
+                { name: 'Moderator', icon: '🛠️', description: 'Manage tour packages, assign guides/vehicles, moderate reviews, and approve new destination requests.' },
+                { name: 'Tour Guide', icon: '🧭', description: 'View assigned trips, update tour progress in real-time, manage group checklists, and submit expenses.' },
+                { name: 'Accountant', icon: '💰', description: 'Manage all financial reports, track income/expenses, process refunds, and manage vendor payments.' },
+                { name: 'Admin', icon: '👑', description: 'Full system access including user management, system configuration, and analytics.' },
+                { name: 'Vendor', icon: '🏢', description: 'Limited access to view contracts, update service availability, and view payment status.' },
+            ];
+            
+            const featureData = {
+                frontend: [
+                    { name: 'Homepage', description: 'Dynamic hero section, search, and highlights for popular packages.' },
+                    { name: 'Package Details', description: 'Comprehensive info, real-time availability, and reviews.' },
+                    { name: 'Advanced Search', description: 'Multi-criteria filtering and sorting options.' },
+                    { name: 'Booking Flow', description: 'Seamless, secure booking with integrated payments.' },
+                    { name: 'User Dashboard', description: 'Personalized hub for bookings, profile, and loyalty points.' },
+                    { name: 'Wishlist & Compare', description: 'Save favorite packages and compare them side-by-side.' },
+                ],
+                backend: [
+                    { name: 'Role-based Dashboards', description: 'Personalized views with relevant KPIs and tasks for each staff role.' },
+                    { name: 'Package Management', description: 'Create and manage all aspects of tour packages, from itinerary to pricing.' },
+                    { name: 'Booking Management', description: 'View all bookings, manage availability, and handle adjustments.' },
+                    { name: 'CRM', description: 'Centralized customer profiles with booking history and communication logs.' },
+                    { name: 'Financial Management', description: 'Track all tour-related income and expenses, generate P/L reports.' },
+                    { name: 'Vendor Management', description: 'Manage vendor contracts, services, and internal ratings.' },
+                ]
+            };
+
+            const rolesGrid = document.getElementById('roles-grid');
+            rolesData.forEach(role => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-xl shadow-sm border border-stone-200 transition-all duration-300 hover:shadow-lg hover:border-blue-300';
+                card.innerHTML = `
+                    <h3 class="font-bold text-xl text-blue-800 mb-2 flex items-center"><span class="text-2xl mr-3">${role.icon}</span> ${role.name}</h3>
+                    <p class="text-stone-600">${role.description}</p>
+                `;
+                rolesGrid.appendChild(card);
+            });
+            
+            const frontendFeaturesContainer = document.getElementById('frontend-features');
+            featureData.frontend.forEach(feature => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-xl shadow-sm border border-stone-200';
+                card.innerHTML = `<h3 class="font-bold text-lg text-blue-800 mb-2">${feature.name}</h3><p class="text-stone-600 text-sm">${feature.description}</p>`;
+                frontendFeaturesContainer.appendChild(card);
+            });
+
+            const backendFeaturesContainer = document.getElementById('backend-features');
+            featureData.backend.forEach(feature => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-xl shadow-sm border border-stone-200';
+                card.innerHTML = `<h3 class="font-bold text-lg text-blue-800 mb-2">${feature.name}</h3><p class="text-stone-600 text-sm">${feature.description}</p>`;
+                backendFeaturesContainer.appendChild(card);
+            });
+
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileNav = document.getElementById('mobile-nav');
+            const sections = document.querySelectorAll('.content-section');
+
+            function switchTab(hash) {
+                const targetId = hash.substring(1);
+                
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.hash === hash);
+                });
+
+                sections.forEach(section => {
+                    section.classList.toggle('active', section.id === targetId);
+                });
+
+                if (targetId === 'analytics') {
+                    renderCharts();
+                }
+                 mobileNav.value = targetId;
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.hash = link.hash;
+                });
+            });
+
+            window.addEventListener('hashchange', () => {
+                const hash = window.location.hash || '#overview';
+                switchTab(hash);
+            });
+            
+            mobileNav.addEventListener('change', (e) => {
+                 window.location.hash = e.target.value;
+            });
+
+            // Initial load
+            const initialHash = window.location.hash || '#overview';
+            switchTab(initialHash);
+
+            // Feature Tabs
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const tab = button.dataset.tab;
+                    if(tab === 'frontend') {
+                        document.getElementById('frontend-features').classList.remove('hidden');
+                        document.getElementById('backend-features').classList.add('hidden');
+                    } else {
+                        document.getElementById('frontend-features').classList.add('hidden');
+                        document.getElementById('backend-features').classList.remove('hidden');
+                    }
+                });
+            });
+
+
+            // Chart rendering
+            let charts = {};
+            function renderCharts() {
+                const chartOptions = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 12 } } },
+                        tooltip: {
+                            backgroundColor: '#1E3A8A',
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 4
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#E5E7EB' } },
+                        x: { grid: { display: false } }
+                    }
+                };
+
+                if (!charts.bookingTrends) {
+                    const ctx1 = document.getElementById('bookingTrendsChart').getContext('2d');
+                    charts.bookingTrends = new Chart(ctx1, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                            datasets: [{
+                                label: 'Bookings',
+                                data: [65, 59, 80, 81, 56, 95],
+                                backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                                borderColor: 'rgba(59, 130, 246, 1)',
+                                borderWidth: 1,
+                                borderRadius: 4
+                            }]
+                        },
+                        options: chartOptions
+                    });
+                }
+
+                if (!charts.popularDestinations) {
+                    const ctx2 = document.getElementById('popularDestinationsChart').getContext('2d');
+                    charts.popularDestinations = new Chart(ctx2, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Cox\'s Bazar', 'Saint Martin', 'Sundarbans', 'Sajek Valley'],
+                            datasets: [{
+                                label: 'Bookings',
+                                data: [300, 150, 100, 210],
+                                backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#6366F1'],
+                                hoverOffset: 4
+                            }]
+                        },
+                        options: { ...chartOptions, scales: { x: { display: false }, y: { display: false } } }
+                    });
+                }
+                
+                if (!charts.revenue) {
+                    const ctx3 = document.getElementById('revenueChart').getContext('2d');
+                    charts.revenue = new Chart(ctx3, {
+                        type: 'line',
+                        data: {
+                             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                            datasets: [{
+                                label: 'Revenue (k BDT)',
+                                data: [120, 190, 300, 250, 420, 450],
+                                borderColor: '#10B981',
+                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                fill: true,
+                                tension: 0.4
+                            }, {
+                                label: 'Expenses (k BDT)',
+                                data: [80, 90, 110, 130, 150, 160],
+                                borderColor: '#EF4444',
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                fill: true,
+                                tension: 0.4
+                            }]
+                        },
+                        options: chartOptions
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
